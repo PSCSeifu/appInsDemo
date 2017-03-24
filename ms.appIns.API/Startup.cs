@@ -59,14 +59,14 @@ namespace ms.appIns.API
             }
 
             //Logging
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"))
+            loggerFactory.AddConsole()
                          .AddSerilog()
                          .AddDebug();
             //Security
 
             //Azure Appliation Insights
-            app.UseApplicationInsightsRequestTelemetry();
-            app.UseApplicationInsightsExceptionTelemetry();
+            //app.UseApplicationInsightsRequestTelemetry();
+            //app.UseApplicationInsightsExceptionTelemetry();
 
             // Custom Middleware
 

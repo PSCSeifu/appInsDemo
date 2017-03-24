@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ms.appIns.Types.Contact;
 using Microsoft.Extensions.Logging;
 using Raven.Client.Document;
+using Serilog;
 
 namespace ms.appIns.API.Controllers
 {
@@ -14,21 +15,30 @@ namespace ms.appIns.API.Controllers
     [Route("api/Contact")]
     public class ContactController : Controller
     {
-        private readonly ILogger<ContactController> _logger;
+        //private readonly ILogger<ContactController> _logger;
 
-        public ContactController(ILogger<ContactController> logger)
+        //public ContactController(ILogger<ContactController> logger)
+        //{
+        //    _logger = logger;          
+        //}
+
+        public ContactController()
         {
-            _logger = logger;
+            //Serilog.ILogger logger = new LoggerConfiguration()
+            //                            .WriteTo.Sink<>.RavenDB
+            //                            .CreateLogger();
         }
 
-        
+
+
 
         //Get api/Contact
         [HttpGet]
         public IActionResult Get()
         {
             var result = Data();
-            _logger.LogInformation("Fetched Contact list { @Contacts}", result);          
+            //_logger.LogInformation("Fetched Contact list { @Contacts}", result);
+            //logger.LogInformation("Fetched Contact list { @Contacts}", result);
             return Json(result);
            
         }
@@ -36,9 +46,9 @@ namespace ms.appIns.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            _logger.LogInformation($"Fetching a contact with id ={id}");
+           // _logger.LogInformation($"Fetching a contact with id ={id}");
             var result = Data().Where(c => c.Id == id).Select(c => c).SingleOrDefault();
-            _logger.LogInformation($"After Fetching a contact with id ={id}", result);
+            //_logger.LogInformation($"After Fetching a contact with id ={id}", result);
             return Json(result);
         }
 
